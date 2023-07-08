@@ -16,14 +16,12 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
     public func screenshot() -> UIImage? {
         guard let containerView = self.superview?.superview,
               let containerSuperview = containerView.superview else { return nil }
-        
-        
-        let renderer = UIGraphicsImageRenderer(bounds: containerView.frame)
-       
-        return renderer.image { (context) in
-            containerSuperview.layer.render(in: context.cgContext)
-            context.cgContext.addPath(UIBezierPath(roundedRect: containerView.frame, cornerRadius: 100).cgPath)
+
+        return UIGraphicsImageRenderer(bounds: containerView.frame).image { (context) in
+            let clippingPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 100).cgPath
+            context.cgContext.addPath(clippingPath)
             context.cgContext.clip(using: .evenOdd)
+            containerSuperview.layer.render(in: context.cgContext)
         }
     }
 }
