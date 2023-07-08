@@ -22,6 +22,10 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
             let cornerRadius = 100.0
             containerSuperview.layer.cornerRadius = cornerRadius
             containerView.layer.cornerRadius = cornerRadius
+            
+            containerSuperview.layer.masksToBounds = true
+            containerView.layer.masksToBounds = true
+            
             containerSuperview.layer.render(in: context.cgContext)
         }
     }
