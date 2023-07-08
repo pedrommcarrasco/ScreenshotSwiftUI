@@ -19,7 +19,7 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
         let renderer = UIGraphicsImageRenderer(bounds: containerView.frame)
        
         return renderer.image { (context) in
-            containerSuperview.layer?.cornerRadius = containerView.frame.height / 10
+            containerSuperview.layer.cornerRadius = containerView.frame.height / 10
             containerSuperview.layer.render(in: context.cgContext)
         }
     }
