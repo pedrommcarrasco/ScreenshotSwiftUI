@@ -18,7 +18,7 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
               let containerSuperview = containerView.superview else { return nil }
 
         return UIGraphicsImageRenderer(bounds: containerView.frame).image { (context) in
-            let clippingPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: 100)
+            let clippingPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: 50)
             clippingPath.addClip()
 //            context.cgContext.addPath(clippingPath)
 //            context.cgContext.clip(using: .evenOdd)
