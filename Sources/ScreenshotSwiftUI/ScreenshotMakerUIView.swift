@@ -16,17 +16,13 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
     public func screenshot() -> UIImage? {
         guard let containerView = self.superview?.superview,
               let containerSuperview = containerView.superview else { return nil }
+        
+        
         let renderer = UIGraphicsImageRenderer(bounds: containerView.frame)
        
         return renderer.image { (context) in
-            let cornerRadius = 100.0
-            containerSuperview.layer.cornerRadius = cornerRadius
-            containerView.layer.cornerRadius = cornerRadius
-            
-            containerSuperview.layer.masksToBounds = true
-            containerView.layer.masksToBounds = true
-            
             containerSuperview.layer.render(in: context.cgContext)
+            context.cgContext.addPath(UIBezierPath(roundedRect: containerView.frame, cornerRadius: 100).cgPath)
         }
     }
 }
