@@ -41,5 +41,7 @@ extension View {
     public func screenshotMaker(_ closure: @escaping (ScreenshotMaker) -> Void) -> some View {
         let screenshotView = ScreenshotMakerView(closure)
         return overlay(screenshotView.allowsHitTesting(false))
+            .cornerRadius(100)
+            .clipped()
     }
 }
