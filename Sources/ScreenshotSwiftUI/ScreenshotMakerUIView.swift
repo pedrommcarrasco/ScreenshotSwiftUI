@@ -18,21 +18,18 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
               let containerSuperview = containerView.superview else { return nil }
 
         return UIGraphicsImageRenderer(bounds: containerView.frame).image { (context) in
-            let clippingPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: 50)
-//            clippingPath.addClip()
-//            context.cgContext.addPath(clippingPath.cgPath)
-//            context.cgContext.clip(using: .evenOdd)
-            let mask = CAShapeLayer()
-            mask.path = clippingPath.cgPath
-            containerSuperview.layer.mask = mask
+            
+            let radius = 50
+            let path = UIBezierPath(
+                roundedRect: containerView.frame,
+                byRoundingCorners: .allCorners,
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            
+            path.close()
+            path.addClip()
+            
             containerSuperview.layer.render(in: context.cgContext)
-            
-            
-//            et rounded = UIBezierPath(roundedRect: rect, cornerRadius: radius)
-//                        rounded.addClip()
         }
     }
 }
-//
-//let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-//
