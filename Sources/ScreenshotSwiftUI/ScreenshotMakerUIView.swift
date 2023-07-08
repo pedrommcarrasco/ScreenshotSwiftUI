@@ -23,6 +23,7 @@ public class ScreenshotMakerUIView: UIView, ScreenshotMaker {
         return renderer.image { (context) in
             containerSuperview.layer.render(in: context.cgContext)
             context.cgContext.addPath(UIBezierPath(roundedRect: containerView.frame, cornerRadius: 100).cgPath)
+            context.cgContext.clip(using: .evenOdd)
         }
     }
 }
